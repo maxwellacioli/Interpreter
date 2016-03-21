@@ -11,7 +11,4 @@ public class Data {
 	public void setLocation(int location) {
 		this.location = location;
 	}
-	
-	
-
 }

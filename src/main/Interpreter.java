@@ -31,7 +31,7 @@ public class Interpreter {
 			}
 			execute(currentInstruction, data);
 		}
-		System.out.println(memory.toString());
+		System.out.println("#########################");
 	}
 
 	private void execute(Instruction instruction, Number data) {
@@ -102,19 +102,18 @@ public class Interpreter {
 			op2 = st[2].toLowerCase();
 
 			if (op2.matches("\\d*")) {
-				memory.set(dataLocation, new Number(Integer.parseInt(op2)));
+				memory.set(dataLocation, new Number(Integer.parseInt(op2), dataLocation));
 			} else if (op2.matches("r1")) {
-				memory.set(dataLocation, new Number(r1));
+				memory.set(dataLocation, new Number(r1, dataLocation));
 			} else if (op2.matches("r2")) {
-				memory.set(dataLocation, new Number(r2));
+				memory.set(dataLocation, new Number(r2, dataLocation));
 			}
 			System.out.println("m[" + dataLocation + "] = "
 					+ memory.get(dataLocation));
 		} else if (instructionType == InstructionType.LOAD.getInstructionType()) {
 			String[] st = instruction.getString().split(" ");
-			String op1, op2;
+			String op1;
 			op1 = st[1].toLowerCase();
-			op2 = st[2].toLowerCase();
 			
 			String[] aux = instruction.getString().split("m\\[");
 			String dataAux = aux[1].split("\\]")[0];

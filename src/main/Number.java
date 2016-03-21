@@ -2,8 +2,9 @@ package main;
 public class Number extends Data {
 	int value;
 
-	public Number(int value) {
+	public Number(int value, int dataLocation) {
 		this.value = value;
+		super.location= dataLocation;
 	}
 
 	public int getValue() {
@@ -16,7 +17,6 @@ public class Number extends Data {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return Integer.toString(value);
 	}
 }
