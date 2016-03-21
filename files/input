@@ -2,4 +2,7 @@ move r1 3
 move r2 2
 add r1 r2
 store m[8] r1
+load r1 m[8]
+add r2 r1
+store m[20] r2
 halt

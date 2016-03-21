@@ -1,9 +1,10 @@
 package main;
+
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class Interpreter {
-	private int ac; //inutil!
+	private int ac; // inutil!
 	private int pc;
 	private int r1, r2 = 0;
 	private Number data;
@@ -107,7 +108,27 @@ public class Interpreter {
 			} else if (op2.matches("r2")) {
 				memory.set(dataLocation, new Number(r2));
 			}
-			System.out.println("m[" + dataLocation + "] = " + memory.get(dataLocation));
+			System.out.println("m[" + dataLocation + "] = "
+					+ memory.get(dataLocation));
+		} else if (instructionType == InstructionType.LOAD.getInstructionType()) {
+			String[] st = instruction.getString().split(" ");
+			String op1, op2;
+			op1 = st[1].toLowerCase();
+			op2 = st[2].toLowerCase();
+			
+			String[] aux = instruction.getString().split("m\\[");
+			String dataAux = aux[1].split("\\]")[0];
+			data.setLocation(Integer.parseInt(dataAux));
+
+			if (op1.equals("r1")) {
+				
+				r1 = data.getValue();
+				System.out.println("r1 = " + r1);
+			} else if (op1.equals("r2")) {
+				r2 = data.getValue();
+				
+				System.out.println("r2 = " + r2);
+			}
 		}
 	}
 
@@ -131,11 +152,13 @@ public class Interpreter {
 					.getInstructionType());
 			return InstructionType.ADD.getInstructionType();
 		case "AND":
-			instruction.setInstructionType(InstructionType.AND //TODO implementar
+			instruction.setInstructionType(InstructionType.AND // TODO
+																// implementar
 					.getInstructionType());
 			return InstructionType.AND.getInstructionType();
 		case "LOAD":
-			instruction.setInstructionType(InstructionType.LOAD //TODO implementar
+			instruction.setInstructionType(InstructionType.LOAD // TODO
+																// implementar
 					.getInstructionType());
 			return InstructionType.LOAD.getInstructionType();
 		case "STORE":
@@ -147,7 +170,8 @@ public class Interpreter {
 					.getInstructionType());
 			return InstructionType.MOVE.getInstructionType();
 		case "JUMP":
-			instruction.setInstructionType(InstructionType.JUMP //TODO implementar
+			instruction.setInstructionType(InstructionType.JUMP // TODO
+																// implementar
 					.getInstructionType());
 			return InstructionType.JUMP.getInstructionType();
 		case "HALT":
