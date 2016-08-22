@@ -26,10 +26,11 @@ public class Interpreter {
 			pc++;
 			instructionType = getInstructionType(currentInstruction);
 			dataLocation = findData(currentInstruction, instructionType);
-			if (dataLocation > 0) {
+			if (dataLocation != -1) {
 				data = (Number) this.memory.get(dataLocation);
 			}
 			execute(currentInstruction, data);
+			
 		}
 		System.out.println("#########################");
 	}
@@ -128,6 +129,10 @@ public class Interpreter {
 				
 				System.out.println("r2 = " + r2);
 			}
+		}
+		else {
+			System.out.println("Erro na linha " + pc + " com a instrução: " + instruction);
+			runBit = false;
 		}
 	}
 
